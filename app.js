@@ -6,6 +6,11 @@ function onMIDISuccess( midiAccess ) {
   midi.inputs.forEach(function(key, port){
     key.onmidimessage = function(e){
       console.log("event", e.data);
+      midiKey = e.data[1]
+      keypress = $.Event('keydown', {keyCode: 82});
+      console.log(keypress);
+      $(window).trigger(keypress);
+      console.log("code", keypress.keyCode)
     }
   })
 }
