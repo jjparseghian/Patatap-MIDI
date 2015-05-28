@@ -5,12 +5,14 @@ function onMIDISuccess( midiAccess ) {
   midi = midiAccess;  // store in the global (in real usage, would probably keep in an object instance)
   midi.inputs.forEach(function(key, port){
     key.onmidimessage = function(e){
-      console.log("event", e.data);
+      console.log("event data", e.data);
       midiKey = e.data[1]
-      keypress = $.Event('keydown', {keyCode: 82});
-      console.log(keypress);
-      $(window).trigger(keypress);
-      console.log("code", keypress.keyCode)
+      keydown = $.Event('keydown');
+      keydown.which = midiKey
+      // keydown.keyCode = 82
+      // keydown = new KeyboardEvent("keydown", {key: "Q", code: "82", charCode: 82, keyCode: 82, which: 82});
+      console.log(keydown);
+      $(window).trigger(keydown);
     }
   })
 }
@@ -20,11 +22,6 @@ function onMIDIFailure(msg) {
 }
 
 navigator.requestMIDIAccess( { sysex: false } ).then( onMIDISuccess, onMIDIFailure );
-
-
-
-
-
 
 // $(document).ready(function(){
 //  midi = null;
