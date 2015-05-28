@@ -149,6 +149,12 @@ function onMIDISuccess( midiAccess ) {
             console.log("hello")
             break;
 
+          // Scene Switcher
+          case "14482":
+            keydown.which = 32;
+            $(window).trigger(keydown);
+            break;
+
         }
       // keydown.keyCode = 82
       // keydown = new KeyboardEvent("keydown", {key: "Q", code: "82", charCode: 82, keyCode: 82, which: 82});
